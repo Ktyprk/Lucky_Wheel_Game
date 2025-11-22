@@ -8,6 +8,10 @@ public class CurrencyManager : MonoBehaviour
     public event Action<int> OnMoneyChanged;
     public event Action<int> OnGoldChanged;
 
+    [Header("Starting Values")] 
+    [SerializeField] private int _startingMoney = 1000; 
+    [SerializeField] private int _startingGold = 500;   
+
     private int _currentMoney;
     private int _currentGold;
 
@@ -29,9 +33,8 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
-        _currentMoney = PlayerPrefs.GetInt(MONEY_KEY, 100);  
-        _currentGold = PlayerPrefs.GetInt(GOLD_KEY, 100);  
+        OnMoneyChanged?.Invoke(_currentMoney);
+        OnGoldChanged?.Invoke(_currentGold);
     }
 
     public int GetMoney() => _currentMoney;
@@ -89,8 +92,22 @@ public class CurrencyManager : MonoBehaviour
     }
 
     private void LoadCurrencies()
+    { 
+        _currentMoney = PlayerPrefs.GetInt(MONEY_KEY, _startingMoney);  
+        _currentGold = PlayerPrefs.GetInt(GOLD_KEY, _startingGold);   
+    }
+    
+    [ContextMenu("Reset Save Data")]
+    public void ResetData()
     {
-        _currentMoney = PlayerPrefs.GetInt(MONEY_KEY, 100);  
-        _currentGold = PlayerPrefs.GetInt(GOLD_KEY, 100);   
+        PlayerPrefs.DeleteKey(MONEY_KEY);
+        PlayerPrefs.DeleteKey(GOLD_KEY);
+        PlayerPrefs.Save();
+        
+        _currentMoney = _startingMoney;
+        _currentGold = _startingGold;
+        
+        OnMoneyChanged?.Invoke(_currentMoney);
+        OnGoldChanged?.Invoke(_currentGold);
     }
 }

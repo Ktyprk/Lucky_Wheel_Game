@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Yetersiz Bakiye");
+            Debug.LogWarning("NOT ENOUGH MONEY");
         }
     }
 
@@ -153,7 +153,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Yetersiz Bakiye");
+            Debug.LogWarning("NOT ENOUGH MONEY");
         }
     }
 
