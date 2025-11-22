@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public enum RewardType
 {
-    Currency,
+    Money,
+    Gold,
     Item,
     Bomb,
-    GoldenReward
+    
 }
 
 [System.Serializable]

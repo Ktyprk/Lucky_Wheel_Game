@@ -31,6 +31,10 @@ public class InventoryManager : MonoBehaviour
         if (!_inventoryData.ContainsKey(item.Name))
         {
             _inventoryData.Add(item.Name, 0);
+        }
+
+        if (!_itemIcons.ContainsKey(item.Name))
+        {
             _itemIcons.Add(item.Name, item.Icon);
         }
 
@@ -48,10 +52,12 @@ public class InventoryManager : MonoBehaviour
     {
         return _itemIcons.ContainsKey(itemName) ? _itemIcons[itemName] : null;
     }
-    
+
     public void ClearInventory()
     {
         _inventoryData.Clear();
-        OnInventoryChanged?.Invoke(); 
+        _itemIcons.Clear(); 
+        
+        OnInventoryChanged?.Invoke();
     }
 }

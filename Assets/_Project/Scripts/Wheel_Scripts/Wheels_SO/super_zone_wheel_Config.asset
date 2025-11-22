@@ -17,37 +17,41 @@ MonoBehaviour:
     Type: 2
     Amount: 0
     Icon: {fileID: 21300000, guid: 061901be477ce634393e73b38f5eaa9d, type: 3}
-  - Name: cash
+  - Name: Cash
     Type: 0
-    Amount: 50
+    Amount: 1000
     Icon: {fileID: 21300000, guid: 2d34e5b8857e4cb45b03c6f616def1dd, type: 3}
   - Name: Gold
-    Type: 0
-    Amount: 10
+    Type: 1
+    Amount: 100
     Icon: {fileID: 21300000, guid: bac2239e72b856744812d1c3c7d48400, type: 3}
-  - Name: Glasses
-    Type: 1
+  - Name: Tier1_shotgun
+    Type: 2
     Amount: 1
-    Icon: {fileID: 21300000, guid: 310d1cc52cf9bd242ad81395ad1cb097, type: 3}
-  - Name: Hat
-    Type: 1
+    Icon: {fileID: 21300000, guid: 5ba414be420836346a90713b7ad754c1, type: 3}
+  - Name: Tier2_mle
+    Type: 2
     Amount: 1
-    Icon: {fileID: 21300000, guid: d6802b0f011fae84c9b8f9910b25b5ed, type: 3}
-  - Name: Pumpkin Helmet
-    Type: 1
+    Icon: {fileID: 21300000, guid: ff16e386ededa4d409a4a59fb4a31a81, type: 3}
+  - Name: Tier2_rifle
+    Type: 2
     Amount: 1
-    Icon: {fileID: 21300000, guid: 3f493e665e2cda04fb89e39c8773929a, type: 3}
-  - Name: 'Chest Big '
-    Type: 1
+    Icon: {fileID: 21300000, guid: 39c97ab5326b0ff4dba161a4c15fb313, type: 3}
+  - Name: Tier3_shotgun
+    Type: 2
     Amount: 1
-    Icon: {fileID: 21300000, guid: 8c3bc4bd87f0548438209b9d74cdf230, type: 3}
-  - Name: Chest Bronze
-    Type: 1
+    Icon: {fileID: 21300000, guid: 56f333a844de7c141a7eb5b06f97ef5e, type: 3}
+  - Name: Tier3_smg
+    Type: 2
     Amount: 1
-    Icon: {fileID: 21300000, guid: 0255fb3a2c22f9549b7223133387bcfa, type: 3}
-  - Name: Chest Standart
-    Type: 1
+    Icon: {fileID: 21300000, guid: 9ff5999b17ea77a419e2d15902e4d44a, type: 3}
+  - Name: Tier3_sniper
+    Type: 2
     Amount: 1
-    Icon: {fileID: 21300000, guid: a06489d987b5a0746876664db60631cb, type: 3}
+    Icon: {fileID: 21300000, guid: b7fc3056e4df87d43b542588be2ae9f6, type: 3}
+  - Name: Chest_Gold
+    Type: 2
+    Amount: 1
+    Icon: {fileID: 21300000, guid: e616e3a8f88941b4782bc6f432976f40, type: 3}
   IsSafeZone: 0
   IsSuperZone: 1

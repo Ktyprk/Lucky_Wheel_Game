@@ -28,9 +28,20 @@ public class WheelSlot : MonoBehaviour
     private void UpdateText(SliceData data)
     {
         if (_amountText == null) return;
-        bool hasAmount = data.Type == RewardType.Currency || data.Type == RewardType.Item;
-        
-        _amountText.text = hasAmount ? data.Amount.ToString() : data.Name;
-        _amountText.gameObject.SetActive(hasAmount);
+
+        bool hasAmount = data.Type == RewardType.Money || 
+                         data.Type == RewardType.Gold || 
+                         data.Type == RewardType.Item;
+    
+        if (hasAmount && data.Amount > 0)
+        {
+            _amountText.text = $"x{data.Amount}"; 
+            _amountText.gameObject.SetActive(true);
+        }
+        else
+        {
+            _amountText.text = data.Name;
+            _amountText.gameObject.SetActive(!string.IsNullOrEmpty(data.Name));
+        }
     }
 }

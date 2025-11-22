@@ -60,6 +60,14 @@ public class WheelUIManager : MonoBehaviour
             _spinButton.interactable = isInteractable;
         }
     }
+    
+    public void SetSpinButtonActive(bool isActive)
+    {
+        if (_spinButton != null)
+        {
+            _spinButton.gameObject.SetActive(isActive);
+        }
+    }
 
     private void OnSpinButtonClicked()
     {

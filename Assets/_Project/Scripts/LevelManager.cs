@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,13 +14,21 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private TextMeshProUGUI _safeZoneText;
     [SerializeField] private TextMeshProUGUI _superZoneText;
+    
+    [Header("Buttons")]
     [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _playButton;
+
+    [Header("Settings")]
+    [SerializeField] private int _reviveCost = 500;
+    [SerializeField] private int _gameStartCost = 25;
 
     private int _currentLevel = 1;
 
     private void Start()
     {
         _exitButton.onClick.AddListener(OnExitButtonPressed);
+        _playButton.onClick.AddListener(OnPlayClicked);
 
         _popupManager.ClaimButton.onClick.AddListener(OnClaimClicked);
         _popupManager.ContinueButton.onClick.AddListener(OnExitContinueClicked);
@@ -27,15 +36,42 @@ public class LevelManager : MonoBehaviour
         _popupManager.GiveUpButton.onClick.AddListener(OnGiveUpClicked);
         _popupManager.ReviveButton.onClick.AddListener(OnReviveClicked);
 
-        StartGame();
+        SetupMainMenuState();
     }
 
-    private void StartGame()
+    private void SetupMainMenuState()
     {
         _currentLevel = 1;
-        _inventoryManager.ClearInventory();
+        
+        _playButton.gameObject.SetActive(true);
+        _uiManager.SetSpinButtonActive(false);
+        _exitButton.interactable = false; 
+
         UpdateLevelContext();
+    }
+
+    private void StartGameplayLoop()
+    {
+        _inventoryManager.ClearInventory();
+
+        _playButton.gameObject.SetActive(false);
+        _uiManager.SetSpinButtonActive(true);
         _uiManager.SetButtonInteractable(true);
+        _exitButton.interactable = true;
+
+        UpdateLevelContext();
+    }
+
+    private void OnPlayClicked()
+    {
+        if (CurrencyManager.Instance.TrySpendCurrency(RewardType.Gold, _gameStartCost))
+        {
+            StartGameplayLoop();
+        }
+        else
+        {
+            Debug.LogWarning("Yetersiz Bakiye");
+        }
     }
 
     private void UpdateLevelContext()
@@ -90,12 +126,10 @@ public class LevelManager : MonoBehaviour
 
     private void OnClaimClicked()
     {
+        SaveSessionRewardsToWallet();
         _popupManager.HideExitPopup();
-        
         _inventoryManager.ClearInventory();
-        _currentLevel = 1;
-        UpdateLevelContext();
-        _uiManager.SetButtonInteractable(true);
+        SetupMainMenuState();
     }
 
     private void OnExitContinueClicked()
@@ -106,16 +140,37 @@ public class LevelManager : MonoBehaviour
     private void OnGiveUpClicked()
     {
         _popupManager.HideDeathPopup();
-        
         _inventoryManager.ClearInventory();
-        _currentLevel = 1;
-        UpdateLevelContext();
-        _uiManager.SetButtonInteractable(true);
+        SetupMainMenuState();
     }
 
     private void OnReviveClicked()
     {
-        _popupManager.HideDeathPopup();
-        _uiManager.SetButtonInteractable(true);
+        if (CurrencyManager.Instance.TrySpendCurrency(RewardType.Gold, _reviveCost))
+        {
+            _popupManager.HideDeathPopup();
+            _uiManager.SetButtonInteractable(true);
+        }
+        else
+        {
+            Debug.LogWarning("Yetersiz Bakiye");
+        }
+    }
+
+    private void SaveSessionRewardsToWallet()
+    {
+        var inventory = _inventoryManager.GetInventory();
+
+        foreach (var item in inventory)
+        {
+            if (item.Key == "Money") 
+            {
+                CurrencyManager.Instance.AddCurrency(RewardType.Money, item.Value);
+            }
+            else if (item.Key == "Gold")
+            {
+                CurrencyManager.Instance.AddCurrency(RewardType.Gold, item.Value);
+            }
+        }
     }
 }
