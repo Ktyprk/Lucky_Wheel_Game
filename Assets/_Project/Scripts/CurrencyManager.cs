@@ -9,8 +9,8 @@ public class CurrencyManager : MonoBehaviour
     public event Action<int> OnGoldChanged;
 
     [Header("Starting Values")] 
-    [SerializeField] private int _startingMoney = 1000; 
-    [SerializeField] private int _startingGold = 500;   
+    [SerializeField] private int _startingMoney = 100; 
+    [SerializeField] private int _startingGold = 100;   
 
     private int _currentMoney;
     private int _currentGold;

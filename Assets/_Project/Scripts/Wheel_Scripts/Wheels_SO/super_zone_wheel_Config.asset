@@ -17,7 +17,7 @@ MonoBehaviour:
     Type: 3
     Amount: 0
     Icon: {fileID: 21300000, guid: 061901be477ce634393e73b38f5eaa9d, type: 3}
-  - Name: Cash
+  - Name: Money
     Type: 0
     Amount: 1000
     Icon: {fileID: 21300000, guid: 2d34e5b8857e4cb45b03c6f616def1dd, type: 3}

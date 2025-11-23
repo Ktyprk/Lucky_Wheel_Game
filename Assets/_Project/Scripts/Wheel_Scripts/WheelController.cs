@@ -107,7 +107,12 @@ public class WheelController : MonoBehaviour
     public void ResetWheelState()
     {
         _isSpinning = false;
-        transform.rotation = Quaternion.identity; 
+        if (_wheelTransform != null)
+        {
+            _wheelTransform.rotation = Quaternion.identity;
+        }
+        
+        InitializeWheel();
     }
 
 }
